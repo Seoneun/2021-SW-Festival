@@ -1,0 +1,50 @@
+version: '3.7'
+services:
+  # frontend:
+  #   build:
+  #     context : ./frontend
+  #     dockerfile: Dockerfile.dev
+  #   container_name: frontend
+  #   ports:
+  #     - "8080:8080"
+  #   volumes:
+  #     - ./frontend:/usr/app
+  #     - /frontend/node_modules
+  gateway:
+    build:
+      context: ./gateway
+    container_name: gateway
+    ports:
+      - "8080:80"
+    depends_on: 
+      - image-service
+      - post-service
+      - transition-service
+  image-service:
+    build:
+      context: ./image-service
+      dockerfile: Dockerfile.dev
+    container_name: image-service
+    ports:
+      - "5000:5000"
+  post-service:
+    build:
+      context: ./post-service
+      dockerfile: Dockerfile.dev
+    container_name: post-service
+    volumes:
+      - ./post-service/src:/usr/app/src
+      - /post-service/node_modules
+    ports:
+      - "3000:3000"
+  transition-service:
+    build:
+      context: ./transition-service
+      dockerfile: Dockerfile.dev
+    container_name: transition-service
+    ports:
+      - "8000:8000"
+  
+    
+    
+   

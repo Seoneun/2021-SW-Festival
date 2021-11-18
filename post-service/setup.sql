@@ -1,0 +1,16 @@
+DROP DATABASE IF EXISTS FestivalDB;
+CREATE DATABASE FestivalDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+USE FestivalDB;
+ 
+DROP TABLE IF EXISTS Image;
+
+SET GLOBAL time_zone='Asia/Seoul';
+set time_zone='Asia/Seoul';
+
+CREATE TABLE Image (
+    id INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+    filename VARCHAR(100) NOT NULL,
+    url VARCHAR(300) NOT NULL,
+    awsKey VARCHAR(150) NOT NULL,
+    PRIMARY KEY(id)
+);
